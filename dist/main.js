@@ -15,11 +15,11 @@ class MyListItemClass {
 
     isExpired() {
         let now = new Date ();
-        return now > this.dueDate
+        return now > this.dueDate;
     }
 
     createTableRow() {
-        const table = document.getElementById("table1");
+        const table = document.getElementById("table");
         const tr = document.createElement("tr");
 
         const tdTitle = document.createElement("td");
@@ -28,20 +28,34 @@ class MyListItemClass {
         const tdDescription = document.createElement("td");
         tdDescription.textContent = this.description;
 
+        const tdDueDate = document.createElement("td");
+        tdDueDate.textContent = this.dueDate;
+
+        const tdPriority = document.createElement("td");
+        tdPriority.textContent = this.priority;
+
+        const tdFinished = document.createElement("td");
+        tdFinished.textContent = this.finished;
 
         tr.appendChild(tdTitle);
         tr.appendChild(tdDescription);
+        tr.appendChild(tdDueDate);
+        tr.appendChild(tdPriority);
+        tr. appendChild(tdFinished);
         table.appendChild(tr);
     }
 }
 
 function addToDo() {
     let title = prompt("Add To Do");
-    console.log(title, new Date());
     const ToDo1 = new MyListItemClass (title, 'desk', new Date(), 1, false);
     ToDo1.createTableRow();
 }
 
+// test form
+function toggleForm(){
+    document.body.classList.toggle('activeForm');
+}
 
 
 //Function that renders different To Do Lists
