@@ -18,31 +18,31 @@
 
 }
 
-.bar > div {
-    padding-left: 105px;
-}
+        .bar > div {
+            padding-left: 105px;
+        }
 
-.log_in {
-    background-color: rgba(0, 0, 0, 0.067);
-    color: rgb(0, 0, 0);
-    border-radius: 7px;
-    border: none;
-    height: 30px;
-    padding: 20px 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    font-size: 40%;
+        .log_in {
+            background-color: rgba(0, 0, 0, 0.067);
+            color: rgb(0, 0, 0);
+            border-radius: 7px;
+            border: solid 1px rgba(0, 217, 255, 0.826);
+            height: 30px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: Roboto, sans-serif;
+            font-weight: 500;
+            font-size: 40%;
 
-    margin-right: 105px;
-    transition-duration: 0,4s;
-}
+            margin-right: 105px;
+            transition-duration: 0,4s;
+        }
 
-.log_in:hover {
-    background-color: rgba(0, 0, 0, 0.155)
-}
+        .log_in:hover {
+            background-color: rgba(0, 0, 0, 0.155)
+        }
 
     /* Body */
 
@@ -82,47 +82,109 @@
     flex-direction: row;
     background: linear-gradient(164deg, rgba(50, 211, 255, 0.307) 0%, rgba(225, 82, 137, 0.212) 100%);
 }
-    .leftPane {
-        display: flex;
-        flex-direction: column;
-        flex: 2;
-        height: 100vh;
-        border-right: solid 1px grey;
-    }
+        .leftPane {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+            height: 100vh;
+            border-right: solid 1px grey;
+            margin-top: 8px;
+        }
 
-    .leftPane > h1 {
-        font-size: 1.8rem;
-        padding-top: 30px;
-        padding-left: 30px;
-    }
+        .leftPane > h1 {
+            font-size: 1.8rem;
+            padding-top: 30px;
+            padding-left: 30px;
+        }
 
-    .bubbly-button {
-        margin: 1rem 0rem;
-        padding: 0.6rem;
-        width: 80%;
-        display: inline-block;
-        margin-left: 15px;
-        background-color: rgba(0, 0, 0, 0.067);
-        color: rgb(0, 0, 0);
-        border-radius: 7px;
-        border: none;
+        .bubbly-button {
+            margin: 1rem 0rem;
+            padding: 0.6rem;
+            width: 80%;
+            display: inline-block;
+            margin-left: 15px;
+            background-color: rgba(0, 0, 0, 0.067);
+            color: rgb(0, 0, 0);
+            border-radius: 7px;
+            border: solid 1px rgba(0, 217, 255, 0.826);
 
-        font-family: Roboto, sans-serif;
-        font-weight: 500;
-        font-size: 1rem;
-        transition-duration: 0,4s;
-    }
+            font-family: Roboto, sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            transition-duration: 0,4s;
+        }
 
-    .bubbly-button:hover {
-        background-color: rgba(0, 0, 0, 0.155)
-    }
+        .bubbly-button:hover {
+            background-color: rgba(0, 0, 0, 0.155)
+        }
 
-    .rightPane {
-        display: flex;
-        flex-direction: column;
-        flex: 7;
-        height: 100vh;
-    }
+        .rightPane {
+            display: flex;
+            flex-direction: column;
+            flex: 7;
+            height: 100vh;
+        }
+
+        li {
+            padding-left: 1.2rem;
+            padding-top: 1rem;
+        }
+
+        li:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+
+#table {
+    padding: 5px;
+    margin: 0px 10px;
+    border-collapse: collapse;
+    border-spacing: 0.5rem;
+}
+
+        .tr1 {
+            border: none;
+            padding-bottom: 10px;
+        }
+        .tr1:hover {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        th {
+            padding-bottom: 0.5rem;
+        }
+
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+        tr {
+            border-spacing: 5px;
+            border: solid 1px grey;
+            border-radius: 10px;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.067);
+        }
+
+.tdCollapsible {
+    max-width: 10%;
+}
+
+.collapsible {
+    border: none;
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}
+
+
+
 
 
 
@@ -176,6 +238,7 @@
     padding:6px;
     font-size:17px;
     border:2px solid #eee;
+    color:#eee;
     background:transparent;
     outline:none;
     border-radius:10px;

@@ -17,7 +17,7 @@
         <div class="bodyWrapper">
             <div class="leftPane">
                 <h1>All Lists</h1>
-                <button class="bubbly-button">Create List</button>
+                <button class="bubbly-button" onclick="createNewList()">Create List</button>
                 <ul>
                     <li>Easy Tasks</li>
                     <li>Outdoor Tasks</li>
@@ -32,20 +32,20 @@
         <div class="close-btn" onclick="toggleForm()">&times;</div>
         <h1>What's left to do?</h1>
         <div class="form-element">
-            <label for="fullname">Title</label>
-            <input type="text" id="fullname">
+            <label for="title">Title</label>
+            <input type="text" id="title">
         </div>
         <div class="form-element">
-            <label for="email">Short Description</label>
-            <input type="text" id="email">
+            <label for="description">Short Description</label>
+            <input type="text" id="description">
         </div>
         <div class="form-element">
-            <label for="password-1">Due Date</label>
-            <input type="date" id="password-1">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate">
         </div>
         <div class="form-element">
-            <label for="password-2">Priority</label>
-            <input type="number" id="password-2">
+            <label for="priority">Priority</label>
+            <input type="number" id="priority">
         </div>
         <div class="form-element">
             <button onclick="addToDo()">Add To Do</button>
@@ -57,8 +57,8 @@
 
     <!-- end of test form -->
 
-        <table id="table">
-            <tr>
+        <table id="table" class="table">
+            <tr class="tr1">
                 <th>Title</th>
                 <th>Description</th>
                 <th>Due Date</th>
@@ -66,6 +66,10 @@
                 <th>Finished?</th>
             </tr>
         </table>
+        <button type="button" class="collapsible">Open Section 2</button>
+        <!-- <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div> -->
         </div> <!-- closing div of rightPane-->
         </div> <!-- closing div of bodyWrapper -->
     </div>
