@@ -46,17 +46,32 @@ class MyListItemClass {
         const collapsible = document.createElement("button");
         collapsible.classList.add("collapsible");
 
-        collapsible.addEventListener("click", makeItCollapse); //Here I put function (colEvent)
+
+        // Collapsible functionality is all the way up here because the addEventListener
+        // has to be added to collapsible as soon as it is created, otherwise it misses the event on pageload and won't work.
+        collapsible.addEventListener("click", function (colEvent) {
+            colEvent.currentTarget.classList.toggle("active");
+            let content = pContent;
+            if (content.style.display === "none") {
+            content.style.display = "block";
+            } else {
+            content.style.display = "none";
+            }
+        });
+
         collapsible.id = "collapsible"
         collapsible.innerHTML = "+";
         
         const content = document.createElement("div");
         content.classList.add ("content");
         const pContent = document.createElement("p");
+
         pContent.classList.add ("content");
         pContent.id = "content";
-        pContent.textContent = "Lorem ipsum dolor sit amet ..."
+        pContent.textContent = "To do item created on: " + new Date;
 
+        //expandible info: date of creation and later on, a delete button
+        const creationDateAndDelBtn = document.createElement("tr")
 
         tr.appendChild(tdTitle);
         tr.appendChild(tdDescription);
@@ -65,9 +80,10 @@ class MyListItemClass {
         tr.appendChild(tdFinished);
         tr.appendChild(tdCollapsible);
         tdCollapsible.appendChild(collapsible);
-        tr.appendChild(content)
+        creationDateAndDelBtn.appendChild(content)
         content.appendChild(pContent);
         table.appendChild(tr);
+        table.appendChild(creationDateAndDelBtn);
     }
 
 }
@@ -95,27 +111,6 @@ function addToDo() {
 };
 
 
-// Functionality for Collapsible
-
-function makeItCollapse () {
-    let coll = document.getElementsByClassName("collapsible");
-    let i;
-    pContent = document.getElementById("content")
-
-    console.log("Collapsible wired")
-        for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function(colEvent) {
-            colEvent.currentTarget.classList.toggle("active");
-            let content = pContent;
-            if (content.style.display === "block") {
-            content.style.display = "none";
-            } else {
-            content.style.display = "block";
-            }
-        });
-    }
-}
-
 
     //Functionality for creating new to do lists
 const submitBtn = document.getElementById("submit");
@@ -131,11 +126,34 @@ function submit () {
 
 
 
-// test form
+// form functionality
 function toggleForm(){
     document.body.classList.toggle('activeForm');
 };
 
+
+
+
+// Functionality for Collapsible
+
+// function makeItCollapse () {
+//     let coll = document.getElementsByClassName("collapsible");
+//     let i;
+//     pContent = document.getElementById("content")
+
+//     console.log("Collapsible wired")
+//         for (i = 0; i < coll.length; i++) {
+//         coll[i].addEventListener("click", function(colEvent) {
+//             colEvent.currentTarget.classList.toggle("active");
+//             let content = pContent;
+//             if (content.style.display === "block") {
+//             content.style.display = "none";
+//             } else {
+//             content.style.display = "block";
+//             }
+//         });
+//     }
+// }
 
 
 
