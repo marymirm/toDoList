@@ -23,6 +23,7 @@ class MyListItemClass {
     createTableRow() {
         const table = document.getElementById("table");
         const tr = document.createElement("tr");
+        tr.id = "tr"
 
         const tdTitle = document.createElement("td");
         tdTitle.textContent = this.title;
@@ -64,11 +65,21 @@ class MyListItemClass {
         
         const content = document.createElement("div");
         content.classList.add ("content");
-        const pContent = document.createElement("p");
 
+        const pContent = document.createElement("p");
         pContent.classList.add ("content");
         pContent.id = "content";
         pContent.textContent = "To do item created on: " + new Date;
+
+        const delBtn = document.createElement("button");
+        delBtn.classList.add ("delBtn");
+        delBtn.addEventListener("click", function() {
+            console.log("clickity")
+            // const tr = document.getElementById("tr")
+            tr.remove();
+            creationDateAndDelBtn.remove();
+        })
+        delBtn.innerHTML = "x"
 
         //expandible info: date of creation and later on, a delete button
         const creationDateAndDelBtn = document.createElement("tr")
@@ -82,6 +93,7 @@ class MyListItemClass {
         tdCollapsible.appendChild(collapsible);
         creationDateAndDelBtn.appendChild(content)
         content.appendChild(pContent);
+        content.appendChild(delBtn);
         table.appendChild(tr);
         table.appendChild(creationDateAndDelBtn);
     }
