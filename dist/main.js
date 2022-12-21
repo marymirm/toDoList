@@ -39,12 +39,23 @@ class MyListItemClass {
         const tdFinished = document.createElement("td");
         tdFinished.textContent = this.finished;
 
-        //Collapsible with button
+        // Collapsible with button
         const tdCollapsible = document.createElement("td");
         tdCollapsible.classList.add("tdCollapsible");
-        const collapsible = document.createElement("button")
+
+        const collapsible = document.createElement("button");
         collapsible.classList.add("collapsible");
+
+        collapsible.addEventListener("click", makeItCollapse); //Here I put function (colEvent)
+        collapsible.id = "collapsible"
         collapsible.innerHTML = "+";
+        
+        const content = document.createElement("div");
+        content.classList.add ("content");
+        const pContent = document.createElement("p");
+        pContent.classList.add ("content");
+        pContent.id = "content";
+        pContent.textContent = "Lorem ipsum dolor sit amet ..."
 
 
         tr.appendChild(tdTitle);
@@ -54,10 +65,11 @@ class MyListItemClass {
         tr.appendChild(tdFinished);
         tr.appendChild(tdCollapsible);
         tdCollapsible.appendChild(collapsible);
-        // tr.appendChild(content)
-        // content.appendChild(pContent);
+        tr.appendChild(content)
+        content.appendChild(pContent);
         table.appendChild(tr);
     }
+
 }
 
 function clearForm() {
@@ -77,30 +89,45 @@ function addToDo() {
     const ToDo = new MyListItemClass (title, description, dueDate, priority);
     myToDos.push(ToDo);
     console.log("To do item added to", ToDo, "and pushed to", myToDos)
+    
     ToDo.createTableRow();
     clearForm();
 };
 
 
 // Functionality for Collapsible
-let coll = document.getElementsByClassName("table");
-let i;
 
-console.log("Collapsible wired")
-for (i = 0; i < coll.length; i++) {
-coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.display === "block") {
-    content.style.display = "none";
-    } else {
-    content.style.display = "block";
+function makeItCollapse () {
+    let coll = document.getElementsByClassName("collapsible");
+    let i;
+    pContent = document.getElementById("content")
+
+    console.log("Collapsible wired")
+        for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function(colEvent) {
+            colEvent.currentTarget.classList.toggle("active");
+            let content = pContent;
+            if (content.style.display === "block") {
+            content.style.display = "none";
+            } else {
+            content.style.display = "block";
+            }
+        });
     }
-    
-});
 }
 
 
+    //Functionality for creating new to do lists
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", submit);
+
+function submit () {
+    const ul = document.getElementById("taskList")
+    const newList = document.createElement("li")
+    newList.textContent = document.getElementById("input").value;
+
+    ul.appendChild(newList);
+}
 
 
 
@@ -108,6 +135,9 @@ coll[i].addEventListener("click", function() {
 function toggleForm(){
     document.body.classList.toggle('activeForm');
 };
+
+
+
 
 
 //Function that renders different To Do Lists

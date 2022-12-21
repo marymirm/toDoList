@@ -17,15 +17,19 @@
         <div class="bodyWrapper">
             <div class="leftPane">
                 <h1>All Lists</h1>
-                <button class="bubbly-button" onclick="createNewList()">Create List</button>
-                <ul>
+                <!-- <button class="bubbly-button" id="leftPaneBtn">Create List</button> -->
+                <div id="divInput">
+                    <input type="text" id="input" placeholder="Create New List...">
+                    <button class="submit" id="submit">></button>
+                </div>
+                <ul id="taskList">
                     <li>Easy Tasks</li>
                     <li>Outdoor Tasks</li>
                     <li>Holiday Tasks</li>
                     <li>Groceries</li>
                 </ul>
             </div>
-            <div class="rightPane">
+            <div class="rightPane" id="rightPane">
 
     <!-- test form -->
         <div class="overlay-form">
@@ -66,7 +70,8 @@
                 <th>Finished?</th>
             </tr>
         </table>
-        <button type="button" class="collapsible">Open Section 2</button>
+        <!-- <button type="button" class="collapsible">Open Section 2</button>
+        <button type="button" class="collapsible">Open Section 3</button> -->
         <!-- <div class="content">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div> -->
