@@ -1,8 +1,7 @@
 myToDos = [];
+myToDoList = [];
 
-console.log("javascript connected correctly");
-
-class MyListItemClass {
+class toDoItem {
     constructor (title, description, dueDate, priority, finished) {
         this.title = title;
         this.description = description;
@@ -58,6 +57,12 @@ class MyListItemClass {
             } else {
             content.style.display = "none";
             }
+            // Hide delBtn too
+            if (delBtn.style.display === "none") {
+                delBtn.style.display = "block";
+                } else {
+                delBtn.style.display = "none";
+                }
         });
 
         collapsible.id = "collapsible"
@@ -82,7 +87,7 @@ class MyListItemClass {
         delBtn.innerHTML = "x"
 
         //expandible info: date of creation and later on, a delete button
-        const creationDateAndDelBtn = document.createElement("tr")
+        const creationDateAndDelBtn = document.createElement("div")
 
         tr.appendChild(tdTitle);
         tr.appendChild(tdDescription);
@@ -114,7 +119,7 @@ function addToDo() {
     let dueDate = document.getElementById("dueDate").value;
     let priority = document.getElementById("priority").value;
     
-    const ToDo = new MyListItemClass (title, description, dueDate, priority);
+    const ToDo = new toDoItem (title, description, dueDate, priority);
     myToDos.push(ToDo);
     console.log("To do item added to", ToDo, "and pushed to", myToDos)
     
@@ -125,16 +130,50 @@ function addToDo() {
 
 
     //Functionality for creating new to do lists
-const submitBtn = document.getElementById("submit");
-submitBtn.addEventListener("click", submit);
 
-function submit () {
-    const ul = document.getElementById("taskList")
-    const newList = document.createElement("li")
-    newList.textContent = document.getElementById("input").value;
+    // make a new class and a new const = new new class, 
+    // push it into empty array and create the li.
+class toDoList{
+    constructor (input) {
+        this.input = input
+    }
+    submit () {
+        const ul = document.getElementById("taskList")
+        const newListName = document.createElement("li")
+        newListName.textContent = this.input;
 
-    ul.appendChild(newList);
+        const listDelBtn = document.createElement("button");
+        listDelBtn.classList.add ("listDelBtn");
+        listDelBtn.addEventListener("click", function() {
+            console.log("listClickity")
+            // const tr = document.getElementById("tr")
+            newListName.remove();
+            listDelBtn.remove();
+        })
+        listDelBtn.innerHTML = "x"
+    
+        ul.appendChild(newListName);
+        newListName.appendChild(listDelBtn);
+    }
 }
+
+function addList () {
+    let input = document.getElementById("input").value;
+    const newList = new toDoList (input);
+    myToDoList.push(newList);
+    console.log("To do list added to", myToDoList)
+    newList.submit();
+}
+
+
+
+function addTodoList() {
+
+}
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", addList);
+
+
 
 
 
