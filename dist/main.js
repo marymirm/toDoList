@@ -1,6 +1,8 @@
 myToDos = [];
 myToDoList = [];
 
+
+// make your individual to-do item
 class toDoItem {
     constructor (title, description, dueDate, priority, finished) {
         this.title = title;
@@ -80,13 +82,12 @@ class toDoItem {
         delBtn.classList.add ("delBtn");
         delBtn.addEventListener("click", function() {
             console.log("clickity")
-            // const tr = document.getElementById("tr")
             tr.remove();
             creationDateAndDelBtn.remove();
         })
         delBtn.innerHTML = "x"
 
-        //expandible info: date of creation and later on, a delete button
+        //expandible info: date of creation and a delete button
         const creationDateAndDelBtn = document.createElement("div")
 
         tr.appendChild(tdTitle);
@@ -102,7 +103,6 @@ class toDoItem {
         table.appendChild(tr);
         table.appendChild(creationDateAndDelBtn);
     }
-
 }
 
 function clearForm() {
@@ -112,7 +112,7 @@ function clearForm() {
     priority.value = "";
 };
 
-
+// find right list with its date ID
 function addToDo() {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
@@ -120,35 +120,60 @@ function addToDo() {
     let priority = document.getElementById("priority").value;
     
     const ToDo = new toDoItem (title, description, dueDate, priority);
-    myToDos.push(ToDo);
-    console.log("To do item added to", ToDo, "and pushed to", myToDos)
+    let activeListID = document.getElementById('idList').innerHTML; // this, in the HTML, is a span-element that contains the listID (the creation date), and is set to display: none.
+    myToDoList.forEach (function (list) {
+        if (list.listId === activeListID) {
+            list.tasks.push(ToDo);
+        }
+    })
     
     ToDo.createTableRow();
     clearForm();
 };
 
 
+            // ------------------------ STEP 1 ------------------------- //
+    //Functionality for creating new to do lists, to which individual to-do items can be added.
 
-    //Functionality for creating new to do lists
+function addList() {
+    let input = document.getElementById("input").value;
+    const newList = new toDoList (input);
+    myToDoList.push(newList);
+    console.log(myToDoList)
+    newList.submit();
+}
 
-    // make a new class and a new const = new new class, 
-    // push it into empty array and create the li.
+//submit button
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", addList);
+
+// form functionality
+function toggleForm(){
+    document.body.classList.toggle('activeForm');
+};
+    
+
 class toDoList{
     constructor (input) {
         this.input = input
+        this.tasks = [];
+        this.listId = Date.now().toString(); // this creates a unique ID for each list
     }
     submit () {
         const ul = document.getElementById("taskList")
         const newListName = document.createElement("li")
+        newListName.id = this.listId;
         newListName.textContent = this.input;
-
+        let l = this;  // let l is needed to specify that 'this' refers to the constructor and not newListName.id = THIS.listId
+        newListName.onclick = function () {
+            renderListWithItsTasks(l)};
+        
         const listDelBtn = document.createElement("button");
         listDelBtn.classList.add ("listDelBtn");
         listDelBtn.addEventListener("click", function() {
-            console.log("listClickity")
-            // const tr = document.getElementById("tr")
             newListName.remove();
             listDelBtn.remove();
+            console.log("listClick: List Deleted Successfully!")
         })
         listDelBtn.innerHTML = "x"
     
@@ -157,70 +182,15 @@ class toDoList{
     }
 }
 
-function addList () {
-    let input = document.getElementById("input").value;
-    const newList = new toDoList (input);
-    myToDoList.push(newList);
-    console.log("To do list added to", myToDoList)
-    newList.submit();
+// functionality for list selection and correct task display per list
+// innerHTML is an invisible text area that is needed to identify a list by the ID (the date) assigned to it.
+function renderListWithItsTasks (activeList) {
+    let idListSpan = document.getElementById("idList");
+    idListSpan.innerHTML = activeList.listId; // listId, remember, is it's creation date, in class toDoList.
+    // what is left: delete current screen and rivalorizzarlo in base alla lista attiva.
 }
 
+// listId = Date.now().toString();
+// idList = span element from html
 
-
-function addTodoList() {
-
-}
-const submitBtn = document.getElementById("submit");
-submitBtn.addEventListener("click", addList);
-
-
-
-
-
-// form functionality
-function toggleForm(){
-    document.body.classList.toggle('activeForm');
-};
-
-
-
-
-// Functionality for Collapsible
-
-// function makeItCollapse () {
-//     let coll = document.getElementsByClassName("collapsible");
-//     let i;
-//     pContent = document.getElementById("content")
-
-//     console.log("Collapsible wired")
-//         for (i = 0; i < coll.length; i++) {
-//         coll[i].addEventListener("click", function(colEvent) {
-//             colEvent.currentTarget.classList.toggle("active");
-//             let content = pContent;
-//             if (content.style.display === "block") {
-//             content.style.display = "none";
-//             } else {
-//             content.style.display = "block";
-//             }
-//         });
-//     }
-// }
-
-
-
-
-//Function that renders different To Do Lists
-
-//DOM-modules
-
-//User Interface functions
-
-    //view all projects
-
-    //view all todos in each project
-
-    //expand todo list item to see/edit details
-
-    //delete a todo
-
-
+// this is confusing so change their names.
