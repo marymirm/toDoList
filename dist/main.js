@@ -1,4 +1,3 @@
-myToDos = [];
 myToDoList = [];
 
 
@@ -110,9 +109,10 @@ function clearForm() {
     description.value = "";
     dueDate.value = "";
     priority.value = "";
+    input.value = "";
 };
 
-// find right list with its date ID
+// find right list with its specified date ID
 function addToDo() {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
@@ -120,9 +120,9 @@ function addToDo() {
     let priority = document.getElementById("priority").value;
     
     const ToDo = new toDoItem (title, description, dueDate, priority);
-    let activeListID = document.getElementById('idList').innerHTML; // this, in the HTML, is a span-element that contains the listID (the creation date), and is set to display: none.
+    let idListSpanElementInHTML = document.getElementById('idList').innerHTML; // this, in the HTML, is a span-element that contains the listId (the creation date), and is set to display: none.
     myToDoList.forEach (function (list) {
-        if (list.listId === activeListID) {
+        if (list.listId === idListSpanElementInHTML) {
             list.tasks.push(ToDo);
         }
     })
@@ -139,8 +139,8 @@ function addList() {
     let input = document.getElementById("input").value;
     const newList = new toDoList (input);
     myToDoList.push(newList);
-    console.log(myToDoList)
     newList.submit();
+    clearForm();
 }
 
 //submit button
@@ -152,7 +152,6 @@ function toggleForm(){
     document.body.classList.toggle('activeForm');
 };
     
-
 class toDoList{
     constructor (input) {
         this.input = input
@@ -161,19 +160,19 @@ class toDoList{
     }
     submit () {
         const ul = document.getElementById("taskList")
-        const newListName = document.createElement("li")
+        const newListName = document.createElement("li") // The only information this contains is it's date-id code.
         newListName.id = this.listId;
         newListName.textContent = this.input;
         let l = this;  // let l is needed to specify that 'this' refers to the constructor and not newListName.id = THIS.listId
-        newListName.onclick = function () {
+        newListName.onclick = function () { // addEventListener does not work in this case
+            console.log(l.tasks);
             renderListWithItsTasks(l)};
-        
+
         const listDelBtn = document.createElement("button");
         listDelBtn.classList.add ("listDelBtn");
         listDelBtn.addEventListener("click", function() {
             newListName.remove();
             listDelBtn.remove();
-            console.log("listClick: List Deleted Successfully!")
         })
         listDelBtn.innerHTML = "x"
     
@@ -182,15 +181,10 @@ class toDoList{
     }
 }
 
-// functionality for list selection and correct task display per list
 // innerHTML is an invisible text area that is needed to identify a list by the ID (the date) assigned to it.
 function renderListWithItsTasks (activeList) {
-    let idListSpan = document.getElementById("idList");
-    idListSpan.innerHTML = activeList.listId; // listId, remember, is it's creation date, in class toDoList.
+    let idListSpanElementInHTML = document.getElementById("idList");
+    idListSpanElementInHTML.innerHTML = activeList.listId; // listId, remember, is its creation date, in class toDoList.
     // what is left: delete current screen and rivalorizzarlo in base alla lista attiva.
-}
-
-// listId = Date.now().toString();
-// idList = span element from html
-
-// this is confusing so change their names.
+   
+}   
