@@ -120,13 +120,13 @@ function addToDo() {
     let priority = document.getElementById("priority").value;
     
     const ToDo = new toDoItem (title, description, dueDate, priority);
-    let idListSpanElementInHTML = document.getElementById('idList').innerHTML; // this, in the HTML, is a span-element that contains the listId (the creation date), and is set to display: none.
+
+    let idListSpanElementInHTML = document.getElementById('idList').innerHTML; // this, in the HTML, is a span-element that contains the listId (the creation date), and is set to display: none. This links the todo to a specific list
     myToDoList.forEach (function (list) {
         if (list.listId === idListSpanElementInHTML) {
             list.tasks.push(ToDo);
         }
     })
-    
     ToDo.createTableRow();
     clearForm();
 };
@@ -165,8 +165,8 @@ class toDoList{
         newListName.textContent = this.input;
         let l = this;  // let l is needed to specify that 'this' refers to the constructor and not newListName.id = THIS.listId
         newListName.onclick = function () { // addEventListener does not work in this case
-            console.log(l.tasks);
-            renderListWithItsTasks(l)};
+            renderListWithItsTasks(l)
+        };
 
         const listDelBtn = document.createElement("button");
         listDelBtn.classList.add ("listDelBtn");
@@ -184,7 +184,16 @@ class toDoList{
 // innerHTML is an invisible text area that is needed to identify a list by the ID (the date) assigned to it.
 function renderListWithItsTasks (activeList) {
     let idListSpanElementInHTML = document.getElementById("idList");
-    idListSpanElementInHTML.innerHTML = activeList.listId; // listId, remember, is its creation date, in class toDoList.
-    // what is left: delete current screen and rivalorizzarlo in base alla lista attiva.
-   
-}   
+    idListSpanElementInHTML.innerHTML = activeList.listId;
+
+    for(let i = 0; i < myToDoList.length; i++) {
+        //if myToDoList list ID ===  this new ID, show me the tasks!
+        if (activeList.listId === idListSpanElementInHTML) {
+                activeList.tasks.style.display = 'none';
+        }
+    }
+}
+
+//user clicks => idListSpanElementInHTML.innerHTML === activeList.listId => 
+    // go to my master lists of lists => find the list with corresponding ID => 
+    // grab that lists tasks
