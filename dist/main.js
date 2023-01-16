@@ -74,11 +74,12 @@ class toDoItem {
 
         const pContent = document.createElement("p");
         pContent.classList.add ("content");
-        pContent.id = "content";
+        // pContent.id = "content";
         pContent.textContent = "To do item created on: " + new Date;
 
         const delBtn = document.createElement("button");
         delBtn.classList.add ("delBtn");
+        delBtn.classList.add ("content");
         delBtn.addEventListener("click", function() {
             console.log("clickity")
             tr.remove();
@@ -87,7 +88,8 @@ class toDoItem {
         delBtn.innerHTML = "x"
 
         //expandible info: date of creation and a delete button
-        const creationDateAndDelBtn = document.createElement("div")
+        const creationDateAndDelBtn = document.createElement("div");
+        creationDateAndDelBtn.id = 'creationDateAndDelBtn';
 
         tr.appendChild(tdTitle);
         tr.appendChild(tdDescription);
@@ -165,6 +167,7 @@ class toDoList{
         newListName.textContent = this.input;
         let l = this;  // let l is needed to specify that 'this' refers to the constructor and not newListName.id = THIS.listId
         newListName.onclick = function () { // addEventListener does not work in this case
+            console.log(l.tasks);
             renderListWithItsTasks(l)
         };
 
@@ -186,14 +189,41 @@ function renderListWithItsTasks (activeList) {
     let idListSpanElementInHTML = document.getElementById("idList");
     idListSpanElementInHTML.innerHTML = activeList.listId;
 
-    for(let i = 0; i < myToDoList.length; i++) {
-        //if myToDoList list ID ===  this new ID, show me the tasks!
-        if (activeList.listId === idListSpanElementInHTML) {
-                activeList.tasks.style.display = 'none';
-        }
-    }
-}
+    
+        const currentTR = document.querySelectorAll('#tr');
+        const currentContentDIVs = document.querySelectorAll('.content')
 
-//user clicks => idListSpanElementInHTML.innerHTML === activeList.listId => 
-    // go to my master lists of lists => find the list with corresponding ID => 
-    // grab that lists tasks
+            // Here, get all CURRENT table rows into an array
+            // --> currentTR.push(tr) and currentContentDIVs.push(creationAndDelBtn) in lines 27 and 93
+
+            // here use a for loop or some way to iterate over it
+            // for each of them, remove it like you've done in previous code.
+            if (currentTR.length > 0) { // check if the array is empty, if not, run for-loop. currentTr.length is an integer so can be bigger than 0. currentTR > 0 doesnt work because its an array.
+                for(let i = 0; i <= currentTR.length; i++) { // length of the two const above is the same, so just one loop is enough
+                    currentTR[i].remove();
+                    // const tr = document.getElementById('tr');
+                    // tr.remove();
+                    currentContentDIVs[i].remove();
+                    // const creationDateAndDelBtn = document.getElementById('creationDateAndDelBtn');
+                    // creationDateAndDelBtn.remove();
+                    }
+            } else {
+                return
+            }
+            // Current DOM elements are removed, we can move onto to adding new ones.
+    
+            // loop through myToDoList
+            for (let i = 0; i <= myToDoList.length; i++) {
+             // find the corresponding list using the ID........>> activeList.listId === idListSpanElementInHTML
+                if (activeList.listId === idListSpanElementInHTML) {
+                    // Whenever we find that list, access that list's tasks array.
+                    const tasksVariable = this.tasks;
+                    // For each of the tasks inside of that tasks arrayy, run the createTableRow() method.
+                    tasksVariable.forEach(function (tasks) {
+                    tasks[i].createTableRow();
+                        });      
+                    }    
+                }
+        }
+
+ 
